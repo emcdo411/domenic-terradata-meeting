@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DARE Framework — Teradata Diagnostic</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f5f0e8;
+    --accent: #c8392b;
+    --gold: #b8860b;
+    --steel: #2c3e50;
+    --mist: #e8e2d4;
+    --rule: rgba(10,10,10,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 48px 64px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: 'DARE';
+    position: absolute;
+    right: -20px;
+    top: -40px;
+    font-family: 'Playfair Display', serif;
+    font-size: 220px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.04);
+    letter-spacing: -10px;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--paper);
+    margin-bottom: 8px;
+  }
+
+  .header-title span {
+    color: var(--accent);
+  }
+
+  .header-subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(245,240,232,0.5);
+    text-transform: uppercase;
+    margin-top: 16px;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(245,240,232,0.1);
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+  }
+
+  .meta-value {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--paper);
+  }
+
+  /* DARE LEGEND */
+  .dare-legend {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .dare-cell {
+    padding: 20px 24px;
+    border-right: 1px solid var(--rule);
+    position: relative;
+    transition: background 0.2s ease;
+  }
+
+  .dare-cell:last-child { border-right: none; }
+
+  .dare-cell:hover { background: var(--mist); }
+
+  .dare-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .dare-word {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+
+  .dare-edge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: rgba(10,10,10,0.4);
+    letter-spacing: 1px;
+  }
+
+  /* MAIN CONTENT */
+  .main {
+    padding: 0 64px 80px;
+  }
+
+  .section-intro {
+    padding: 40px 0 32px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 0;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .intro-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(10,10,10,0.4);
+    padding-top: 4px;
+  }
+
+  .intro-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--steel);
+    font-style: italic;
+  }
+
+  /* QUESTION CARDS */
+  .questions-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .question-card {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--rule);
+    padding: 48px 0;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .question-card:hover .question-number {
+    color: var(--accent);
+  }
+
+  .question-number-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 4px;
+  }
+
+  .question-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: 900;
+    color: var(--mist);
+    line-height: 1;
+    transition: color 0.3s ease;
+  }
+
+  .question-dare-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 8px;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    white-space: nowrap;
+  }
+
+  .question-content {
+    padding-left: 32px;
+    border-left: 2px solid var(--mist);
+    transition: border-color 0.3s ease;
+  }
+
+  .question-card:hover .question-content {
+    border-left-color: var(--accent);
+  }
+
+  .question-layer-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 4px 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .question-layer-badge .badge-dot {
+    width: 5px;
+    height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  .question-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+
+  .question-context {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(10,10,10,0.6);
+    margin-bottom: 24px;
+    max-width: 640px;
+  }
+
+  .question-the-ask {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .question-the-ask::before {
+    content: '\201C';
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .question-the-ask p {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.6;
+    padding-top: 8px;
+  }
+
+  .question-signals {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .signal-item {
+    padding: 12px 16px;
+    border: 1px solid var(--rule);
+    background: var(--mist);
+  }
+
+  .signal-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(10,10,10,0.4);
+    margin-bottom: 4px;
+  }
+
+  .signal-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  /* POSITIONING STRIP */
+  .positioning-strip {
+    margin-top: 48px;
+    background: var(--steel);
+    color: var(--paper);
+    padding: 40px 48px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .strip-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    margin-bottom: 12px;
+  }
+
+  .strip-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--paper);
+  }
+
+  .strip-heading span { color: var(--accent); }
+
+  .strip-points {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .strip-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .strip-point-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    padding-top: 2px;
+    flex-shrink: 0;
+    letter-spacing: 1px;
+  }
+
+  .strip-point-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(245,240,232,0.8);
+  }
+
+  /* FOOTER */
+  .doc-footer {
+    margin-top: 0;
+    padding: 24px 64px;
+    border-top: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--paper);
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .footer-brand span { color: var(--accent); }
+
+  .footer-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(10,10,10,0.4);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .question-card {
+    animation: fadeInUp 0.5s ease both;
+  }
+
+  .question-card:nth-child(1) { animation-delay: 0.1s; }
+  .question-card:nth-child(2) { animation-delay: 0.2s; }
+  .question-card:nth-child(3) { animation-delay: 0.3s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .header { padding: 32px 24px; }
+    .main { padding: 0 24px 60px; }
+    .dare-legend { grid-template-columns: repeat(2, 1fr); }
+    .question-card { grid-template-columns: 48px 1fr; }
+    .question-number { font-size: 36px; }
+    .question-signals { grid-template-columns: 1fr; }
+    .section-intro { grid-template-columns: 1fr; gap: 16px; }
+    .positioning-strip { grid-template-columns: 1fr; gap: 24px; padding: 32px 24px; }
+    .header-meta { flex-wrap: wrap; gap: 16px; }
+    .doc-footer { padding: 20px 24px; flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-eyebrow">Epoch Frameworks LLC — Diagnostic Brief</div>
+  <div class="header-title">Three Questions<br>for <span>Domenic Ravita</span></div>
+  <div class="header-subtitle">DARE Framework Applied — Teradata AI Readiness Lens</div>
+  <div class="header-meta">
+    <div class="meta-item">
+      <div class="meta-label">Prepared By</div>
+      <div class="meta-value">Erwin Maurice McDonald</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Target</div>
+      <div class="meta-value">Domenic Ravita, VP — Teradata</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Date</div>
+      <div class="meta-value">Friday, May 1 2026</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Framework</div>
+      <div class="meta-value">DARE — AI Adoption Intelligence</div>
+    </div>
+  </div>
+</div>
+
+<!-- DARE LEGEND -->
+<div class="dare-legend">
+  <div class="dare-cell">
+    <div class="dare-letter">D</div>
+    <div class="dare-word">Data</div>
+    <div class="dare-edge">Insight Edge</div>
+  </div>
+  <div class="dare-cell">
+    <div class="dare-letter">A</div>
+    <div class="dare-word">Agility</div>
+    <div class="dare-edge">Execution Edge</div>
+  </div>
+  <div class="dare-cell">
+    <div class="dare-letter">R</div>
+    <div class="dare-word">Risk</div>
+    <div class="dare-edge">Disruption Readiness</div>
+  </div>
+  <div class="dare-cell">
+    <div class="dare-letter">E</div>
+    <div class="dare-word">Evolution</div>
+    <div class="dare-edge">Growth Layer</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <div class="section-intro">
+    <div class="intro-label">Context &amp; Intent</div>
+    <div class="intro-text">
+      Domenic is a new VP at Teradata navigating a competitive battlefield against Snowflake and Databricks. These questions are not interrogations — they are diagnostic instruments designed to surface where the real work lives and where your methodology creates immediate value.
+    </div>
+  </div>
+
+  <div class="questions-grid">
+
+    <!-- QUESTION 1 -->
+    <div class="question-card">
+      <div class="question-number-col">
+        <div class="question-number">01</div>
+        <div class="question-dare-tag">D — Data Layer</div>
+      </div>
+      <div class="question-content">
+        <div class="question-layer-badge">
+          <span class="badge-dot"></span>
+          Data — Insight Edge
+        </div>
+        <div class="question-headline">Where is Teradata generating data that leadership is not yet turning into decisions?</div>
+        <div class="question-context">
+          Teradata has been in the data business since 1979. They have more data infrastructure than almost any company on the planet. But infrastructure and intelligence are not the same thing. Most organizations at Teradata's scale are data-rich and insight-poor at the decision layer — meaning the data exists but the governance layer that routes it to the right decision-maker at the right time is broken or missing entirely.
+        </div>
+        <div class="question-the-ask">
+          <p>Domenic, when you look across your new roadmap at Teradata — where are you seeing the biggest gap between the data your platform generates and the decisions your leadership team is actually making because of it?</p>
+        </div>
+        <div class="question-signals">
+          <div class="signal-item">
+            <div class="signal-label">Listen For</div>
+            <div class="signal-text">Specific business units where insight latency is costing them</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-label">Your Value</div>
+            <div class="signal-text">AI Governance layer that routes insight to decision faster</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-label">Salt Angle</div>
+            <div class="signal-text">Engineering the intelligence pipeline from data to decision</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTION 2 -->
+    <div class="question-card">
+      <div class="question-number-col">
+        <div class="question-number">02</div>
+        <div class="question-dare-tag">A — Agility Layer</div>
+      </div>
+      <div class="question-content">
+        <div class="question-layer-badge">
+          <span class="badge-dot"></span>
+          Agility — Execution Edge
+        </div>
+        <div class="question-headline">Which assumptions inside Teradata's AI strategy have the shortest expiration date right now?</div>
+        <div class="question-context">
+          This is your signature concept applied directly to his world. Every enterprise AI strategy is built on assumptions about market position, customer behavior, and competitive dynamics. Snowflake and Databricks are not standing still. The assumptions Teradata built its current roadmap on six months ago may already be expiring. A new VP walking into that environment needs to know which assumptions to pressure-test first before committing resources.
+        </div>
+        <div class="question-the-ask">
+          <p>As you build out your roadmap, which of Teradata's current strategic assumptions about AI adoption feel most time-sensitive to you — and what would it mean if those assumptions expired before the roadmap delivered?</p>
+        </div>
+        <div class="question-signals">
+          <div class="signal-item">
+            <div class="signal-label">Listen For</div>
+            <div class="signal-text">Where he already sees the strategy calcifying before it ships</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-label">Your Value</div>
+            <div class="signal-text">Criteria Expiration framework identifies which assumptions need refresh cycles</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-label">Salt Angle</div>
+            <div class="signal-text">Rapid prototyping and validation before assumptions lock in</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTION 3 -->
+    <div class="question-card">
+      <div class="question-number-col">
+        <div class="question-number">03</div>
+        <div class="question-dare-tag">R+E — Risk &amp; Evolution</div>
+      </div>
+      <div class="question-content">
+        <div class="question-layer-badge">
+          <span class="badge-dot"></span>
+          Risk + Evolution — Disruption Readiness
+        </div>
+        <div class="question-headline">Is Teradata positioned to be the disruptor in its space — or is it engineering a sophisticated response to disruption that has already happened?</div>
+        <div class="question-context">
+          This is the most provocative question and the most important one. Snowflake and Databricks have already moved the market. Teradata has the legacy infrastructure, the enterprise relationships, and the data depth that neither competitor can replicate quickly. But being the biggest is not the same as being the boldest. If Teradata's AI roadmap is primarily defensive — built to close the gap with competitors rather than open a new one — then it is already behind before it ships. A new VP has a unique window to shape that direction before it calcifies.
+        </div>
+        <div class="question-the-ask">
+          <p>When you look at where Teradata's AI roadmap is heading versus where Snowflake and Databricks are moving — do you see Teradata as the one setting the pace, or responding to it? And where in your roadmap is there room to change that answer?</p>
+        </div>
+        <div class="question-signals">
+          <div class="signal-item">
+            <div class="signal-label">Listen For</div>
+            <div class="signal-text">Whether he sees the offensive opportunity or is locked in defensive framing</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-label">Your Value</div>
+            <div class="signal-text">CES Delta scoring reveals where Teradata leads and where it lags vs competitors</div>
+          </div>
+          <div class="signal-item">
+            <div class="signal-label">Salt Angle</div>
+            <div class="signal-text">Engineering the evolution layer — building systems that lead rather than follow</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- POSITIONING STRIP -->
+  <div class="positioning-strip">
+    <div>
+      <div class="strip-label">Your Positioning</div>
+      <div class="strip-heading">You are not pitching.<br>You are <span>diagnosing.</span></div>
+    </div>
+    <div class="strip-points">
+      <div class="strip-point">
+        <div class="strip-point-num">01 —</div>
+        <div class="strip-point-text">Lead with the questions. Let Domenic's answers surface the engagement naturally. You already know what the gaps are — you need him to name them himself.</div>
+      </div>
+      <div class="strip-point">
+        <div class="strip-point-num">02 —</div>
+        <div class="strip-point-text">When he answers Question 3, that is your opening. If he says Teradata is responding rather than leading — that is where you introduce the Criteria Expiration concept and the CES Delta scoring methodology.</div>
+      </div>
+      <div class="strip-point">
+        <div class="strip-point-num">03 —</div>
+        <div class="strip-point-text">Salt Technologies is your delivery infrastructure. You bring the DARE diagnostic layer. Together you can take whatever gap Domenic identifies and build a sprint around it within two weeks.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <div class="footer-brand">Epoch <span>Frameworks</span> LLC</div>
+  <div class="footer-meta">DACR License v2.6 — McDonald (2026) — Confidential</div>
+</div>
+
+</body>
+</html>
