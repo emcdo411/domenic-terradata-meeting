@@ -4,142 +4,274 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Teradata AI Governance Accountability Brief | Epoch Frameworks</title>
-  <meta name="description" content="Executive AI governance accountability brief using DARE, ESIL, SHT, CES, MOC, and EBT lenses." />
+  <meta name="description" content="Executive AI governance accountability brief built from DARE, ESIL, SHT, CES, MOC, and EBT lenses for Teradata accountability architecture review." />
+  <meta property="og:title" content="Teradata AI Governance Accountability Brief" />
+  <meta property="og:description" content="Automated governance is not accountability architecture. A DARE, ESIL, SHT, CES, MOC, and EBT executive brief." />
+  <meta property="og:type" content="website" />
   <style>
     :root {
       --ink: #24243f;
-      --muted: #6f7382;
+      --muted: #687080;
       --bg: #f7f6fb;
-      --panel: #ffffff;
+      --panel: rgba(255,255,255,0.92);
+      --panel-solid: #ffffff;
       --line: #ded9ec;
       --purple: #7760a8;
+      --purple-2: #8b73be;
       --deep: #2b2f77;
       --soft: #ece8f6;
+      --soft-2: #f4f1fb;
       --green: #1f7a4d;
       --orange: #b66a18;
       --red: #a13d4f;
-      --shadow: 0 18px 50px rgba(38, 35, 75, 0.12);
+      --blue: #4c66a4;
+      --charcoal: #1d2434;
+      --shadow: 0 22px 60px rgba(38, 35, 75, 0.13);
+      --shadow-soft: 0 12px 36px rgba(38, 35, 75, 0.09);
+      --radius: 26px;
     }
 
     * { box-sizing: border-box; }
 
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      background: radial-gradient(circle at top left, #ffffff 0, var(--bg) 38%, #f2f0f8 100%);
+      background:
+        radial-gradient(circle at 12% 2%, rgba(119,96,168,0.17), transparent 29%),
+        radial-gradient(circle at 90% 8%, rgba(43,47,119,0.13), transparent 28%),
+        linear-gradient(180deg, #ffffff 0%, var(--bg) 42%, #f1eff8 100%);
       color: var(--ink);
-      line-height: 1.55;
+      line-height: 1.58;
     }
 
+    a { color: inherit; }
+
     .wrap {
-      width: min(1180px, calc(100% - 40px));
+      width: min(1220px, calc(100% - 42px));
       margin: 0 auto;
     }
 
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(247,246,251,0.76);
+      border-bottom: 1px solid rgba(222,217,236,0.75);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 64px;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      font-weight: 850;
+      color: var(--deep);
+      letter-spacing: -0.025em;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--deep), var(--purple));
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 900;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.87rem;
+      font-weight: 750;
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+
+    .links a:hover { background: var(--soft); color: var(--deep); }
+
     header {
-      padding: 54px 0 28px;
+      padding: 62px 0 30px;
     }
 
     .eyebrow {
       color: var(--purple);
-      font-weight: 700;
-      letter-spacing: 0.12em;
+      font-weight: 850;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       font-size: 0.78rem;
       margin-bottom: 14px;
     }
 
     h1 {
-      font-size: clamp(2.35rem, 5vw, 5rem);
-      line-height: 0.95;
-      margin: 0 0 20px;
+      font-size: clamp(2.55rem, 5.5vw, 5.7rem);
+      line-height: 0.93;
+      margin: 0 0 22px;
       color: var(--deep);
-      letter-spacing: -0.055em;
-      max-width: 980px;
+      letter-spacing: -0.062em;
+      max-width: 1060px;
     }
 
     .subtitle {
-      max-width: 850px;
-      font-size: 1.18rem;
+      max-width: 930px;
+      font-size: clamp(1.05rem, 1.45vw, 1.22rem);
       color: var(--muted);
       margin: 0 0 28px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 24px;
-      align-items: stretch;
-      margin: 28px 0 52px;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.88);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      padding: 28px;
-    }
-
-    .thesis {
-      font-size: clamp(1.45rem, 2.2vw, 2rem);
-      line-height: 1.18;
-      font-weight: 750;
-      color: var(--deep);
-      margin: 0;
-    }
-
-    .note {
-      color: var(--muted);
-      margin-top: 16px;
-    }
-
-    .scorebox {
-      display: grid;
-      gap: 14px;
-    }
-
-    .score {
-      font-size: 3.4rem;
-      font-weight: 800;
-      color: var(--deep);
-      line-height: 1;
     }
 
     .badge-row {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 18px;
+      margin-top: 20px;
     }
 
     .pill {
       display: inline-flex;
       align-items: center;
       border: 1px solid var(--line);
-      background: var(--soft);
+      background: rgba(236,232,246,0.92);
       color: var(--deep);
       border-radius: 999px;
       padding: 8px 12px;
-      font-size: 0.85rem;
-      font-weight: 700;
+      font-size: 0.84rem;
+      font-weight: 800;
+      white-space: nowrap;
     }
 
-    section {
-      padding: 26px 0;
+    .pill.red { background: #f8e9ed; color: var(--red); }
+    .pill.green { background: #e7f4ee; color: var(--green); }
+    .pill.orange { background: #fff0df; color: var(--orange); }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(340px, 0.75fr);
+      gap: 24px;
+      align-items: stretch;
+      margin: 30px 0 56px;
     }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 30px;
+    }
+
+    .thesis {
+      font-size: clamp(1.65rem, 2.45vw, 2.45rem);
+      line-height: 1.13;
+      font-weight: 880;
+      color: var(--deep);
+      margin: 0;
+      letter-spacing: -0.035em;
+    }
+
+    .note { color: var(--muted); margin: 18px 0 0; }
+
+    .scorebox {
+      display: grid;
+      gap: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scorebox:after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -55px auto;
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(119,96,168,0.18), transparent 68%);
+    }
+
+    .score {
+      font-size: 4.4rem;
+      font-weight: 900;
+      color: var(--deep);
+      line-height: 0.9;
+      letter-spacing: -0.065em;
+    }
+
+    .score-meta {
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+    }
+
+    .score-meta strong { color: var(--ink); }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.74);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .stat .num {
+      color: var(--deep);
+      font-size: 1.45rem;
+      font-weight: 900;
+      letter-spacing: -0.035em;
+    }
+
+    .stat .label {
+      color: var(--muted);
+      font-size: 0.86rem;
+      font-weight: 700;
+      margin-top: 3px;
+    }
+
+    section { padding: 28px 0; }
 
     h2 {
-      font-size: clamp(1.65rem, 3vw, 2.5rem);
+      font-size: clamp(1.8rem, 3.1vw, 2.75rem);
+      line-height: 1.05;
       margin: 0 0 16px;
       color: var(--deep);
-      letter-spacing: -0.035em;
+      letter-spacing: -0.045em;
     }
 
     h3 {
       color: var(--ink);
-      margin: 0 0 8px;
-      font-size: 1.08rem;
+      margin: 0 0 9px;
+      font-size: 1.1rem;
+      letter-spacing: -0.015em;
+    }
+
+    .section-lead {
+      max-width: 890px;
+      color: var(--muted);
+      margin: -6px 0 22px;
+      font-size: 1.03rem;
     }
 
     .grid-4 {
@@ -148,30 +280,40 @@
       gap: 16px;
     }
 
-    .mini {
-      border-radius: 20px;
-      padding: 22px;
-      background: var(--panel);
-      border: 1px solid var(--line);
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
     }
 
+    .mini {
+      border-radius: 22px;
+      padding: 23px;
+      background: var(--panel-solid);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .mini p { color: var(--muted); margin: 0; }
+
     .letter {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
+      width: 44px;
+      height: 44px;
+      border-radius: 15px;
       display: grid;
       place-items: center;
-      background: var(--deep);
+      background: linear-gradient(135deg, var(--deep), var(--purple));
       color: white;
-      font-weight: 800;
-      margin-bottom: 14px;
+      font-weight: 900;
+      margin-bottom: 15px;
+      box-shadow: var(--shadow-soft);
     }
 
     .flow {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 12px;
-      margin-top: 20px;
+      margin-top: 18px;
     }
 
     .flow div {
@@ -179,10 +321,18 @@
       border: 1px solid var(--line);
       padding: 16px;
       border-radius: 18px;
-      font-weight: 750;
+      font-weight: 850;
       color: var(--deep);
       text-align: center;
     }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .image-card { padding: 18px; }
 
     .image-card img {
       width: 100%;
@@ -192,34 +342,54 @@
       background: white;
     }
 
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
     .callout {
       border-left: 5px solid var(--purple);
       background: #fff;
       padding: 22px 24px;
       border-radius: 18px;
-      box-shadow: var(--shadow);
-      font-size: 1.15rem;
-      font-weight: 700;
+      box-shadow: var(--shadow-soft);
+      font-size: 1.13rem;
+      font-weight: 800;
       color: var(--deep);
+    }
+
+    .delta {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .delta-box {
+      background: var(--panel-solid);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .delta-box h3 { color: var(--deep); }
+
+    .delta-arrow {
+      display: grid;
+      place-items: center;
+      color: var(--purple);
+      font-weight: 900;
+      font-size: 1.6rem;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       overflow: hidden;
-      border-radius: 18px;
+      border-radius: 20px;
       background: white;
       border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
     }
 
     th, td {
-      padding: 14px 16px;
+      padding: 15px 16px;
       border-bottom: 1px solid var(--line);
       text-align: left;
       vertical-align: top;
@@ -228,153 +398,328 @@
     th {
       background: var(--soft);
       color: var(--deep);
-      font-size: 0.9rem;
+      font-size: 0.82rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.07em;
     }
 
     tr:last-child td { border-bottom: none; }
 
+    td:first-child { font-weight: 850; color: var(--deep); }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      counter-reset: sprint;
+    }
+
+    .step {
+      position: relative;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .step:before {
+      counter-increment: sprint;
+      content: "0" counter(sprint);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 13px;
+      background: var(--deep);
+      color: white;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .repo-map {
+      background: #171b2b;
+      color: #edf0ff;
+      border-radius: 24px;
+      padding: 24px;
+      overflow-x: auto;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .repo-map pre {
+      margin: 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: #edf0ff;
+    }
+
     .cta {
       background: linear-gradient(135deg, var(--deep), var(--purple));
       color: white;
-      border-radius: 28px;
-      padding: 34px;
+      border-radius: 30px;
+      padding: 38px;
       box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta:after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -80px;
+      bottom: -100px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.13);
     }
 
     .cta h2 { color: white; }
-    .cta p { color: rgba(255,255,255,0.84); max-width: 820px; }
+    .cta p { color: rgba(255,255,255,0.86); max-width: 880px; }
+
+    .button-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
 
     .button {
       display: inline-block;
-      margin-top: 14px;
       background: white;
       color: var(--deep);
       text-decoration: none;
-      font-weight: 800;
-      padding: 12px 18px;
+      font-weight: 900;
+      padding: 13px 18px;
       border-radius: 999px;
+    }
+
+    .button.secondary {
+      background: rgba(255,255,255,0.13);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.35);
     }
 
     footer {
       color: var(--muted);
-      padding: 36px 0 54px;
+      padding: 38px 0 58px;
       font-size: 0.92rem;
     }
 
-    @media (max-width: 900px) {
-      .hero-grid, .two-col, .grid-4, .flow { grid-template-columns: 1fr; }
-      header { padding-top: 36px; }
+    .fineprint {
+      display: grid;
+      gap: 6px;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid, .two-col, .grid-4, .grid-3, .flow, .timeline, .delta { grid-template-columns: 1fr; }
+      .delta-arrow { transform: rotate(90deg); }
+      header { padding-top: 44px; }
+      .links { display: none; }
+      .score { font-size: 3.5rem; }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      .wrap { width: min(100% - 28px, 1220px); }
+      .card, .cta { padding: 24px; }
+      .stat-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 2.65rem; }
     }
   </style>
 </head>
 <body>
+  <div class="topbar">
+    <nav class="wrap nav" aria-label="Primary navigation">
+      <div class="brand"><span class="mark">EF</span><span>Epoch Frameworks | AI Governance Brief</span></div>
+      <div class="links">
+        <a href="#dare">DARE</a>
+        <a href="#scorecard">Scorecard</a>
+        <a href="#evidence">Evidence</a>
+        <a href="#stack">Framework Stack</a>
+        <a href="#sprint">Sprint</a>
+      </div>
+    </nav>
+  </div>
+
   <header class="wrap">
-    <div class="eyebrow">Epoch Frameworks LLC | McDonald 2026</div>
-    <h1>Teradata AI Governance Accountability Brief</h1>
-    <p class="subtitle">A client ready executive page built from the DARE, ESIL, SHT, CES, MOC, and EBT framework stack. The focus is not whether platform governance exists. The focus is whether accountability has an owner.</p>
-    <div class="badge-row">
+    <div class="eyebrow">McDonald 2026 | Teradata Meeting System</div>
+    <h1>AI governance accountability starts where platform controls stop.</h1>
+    <p class="subtitle">This executive page packages the Teradata governance stress test into a shareable client brief. It connects the DARE layer, ESIL evidence scan, SHT scorecard, CES criteria review, MOC constraint finding, and EBT accountability-laundering lens into one decision-support artifact.</p>
+    <div class="badge-row" aria-label="Framework badges">
       <span class="pill">DARE Layer</span>
       <span class="pill">ESIL v1.0</span>
-      <span class="pill">SHT Scorecard</span>
-      <span class="pill">CES Scoring Layer</span>
-      <span class="pill">DACR v2.6</span>
+      <span class="pill">SHT 61/100</span>
+      <span class="pill red">Extraction Emerging</span>
+      <span class="pill orange">Compliance-as-Cover Risk</span>
+      <span class="pill green">DACR v2.6</span>
     </div>
   </header>
 
   <main class="wrap">
     <div class="hero-grid">
       <article class="card">
+        <div class="eyebrow">Strategic Thesis</div>
         <p class="thesis">Automated governance is not the same as accountability architecture.</p>
-        <p class="note">Teradata can provide platform controls, guardrails, evaluations, and compliance checks. The strategic gap is whether the client has a named operations sponsor responsible for post deployment review, drift detection, and decision loop closure.</p>
+        <p class="note">Teradata can provide platform controls, guardrails, evaluations, compliance checks, and human-in-the-loop language. The strategic gap is whether the client has a named operations sponsor responsible for post-deployment review, drift detection, outcome validation, and Measure-to-Manage loop closure.</p>
+        <div class="stat-grid">
+          <div class="stat"><div class="num">2</div><div class="label">SHT dimensions below threshold</div></div>
+          <div class="stat"><div class="num">61</div><div class="label">Total SHT score</div></div>
+          <div class="stat"><div class="num">T3</div><div class="label">Primary constraint: governance</div></div>
+          <div class="stat"><div class="num">Q1</div><div class="label">Conversation hook: owner gap</div></div>
+        </div>
       </article>
-      <aside class="card scorebox">
+      <aside class="card scorebox" aria-label="SHT score summary">
         <div class="eyebrow">SHT Read</div>
         <div class="score">61/100</div>
-        <div><strong>Zone:</strong> Extraction Emerging</div>
-        <div><strong>Primary gap:</strong> Operations sponsor accountability</div>
+        <div class="score-meta">
+          <div><strong>Zone:</strong> Orange, Extraction Emerging</div>
+          <div><strong>Primary Gap:</strong> Operations sponsor accountability</div>
+          <div><strong>Risk Pattern:</strong> Governance narrative leads platform reality</div>
+          <div><strong>Entry Point:</strong> Accountability architecture sprint</div>
+        </div>
       </aside>
     </div>
 
-    <section>
+    <section id="dare">
       <h2>The DARE Diagnostic</h2>
+      <p class="section-lead">DARE functions as a decision-compression layer. It forces the conversation away from broad AI excitement and into a clear operating question: where is accountability owned after AI is deployed?</p>
       <div class="grid-4">
         <div class="mini">
           <div class="letter">D</div>
           <h3>Data</h3>
-          <p>Tests whether insight is converted into governed action, not merely captured in dashboards or platform telemetry.</p>
+          <p>Tests whether insight, telemetry, and agent behavior are converted into governed operational action rather than left as passive platform evidence.</p>
         </div>
         <div class="mini">
           <div class="letter">A</div>
           <h3>Agility</h3>
-          <p>Tests whether legacy assumptions expire before they become governance risk in autonomous AI environments.</p>
+          <p>Tests whether governance assumptions expire fast enough to keep pace with autonomous AI, regulatory change, and client-side operating complexity.</p>
         </div>
         <div class="mini">
           <div class="letter">R</div>
           <h3>Risks</h3>
-          <p>Tests whether compliance language is hiding a missing owner, stale criteria, or disruption deferral.</p>
+          <p>Tests whether compliance language is being used as cover for missing ownership, stale criteria, or unresolved post-deployment responsibility.</p>
         </div>
         <div class="mini">
           <div class="letter">E</div>
           <h3>Evolution</h3>
-          <p>Tests whether leadership is operating from future accountability requirements or prior cycle platform comfort.</p>
+          <p>Tests whether leadership is building toward future accountability requirements or relying on prior-cycle platform comfort.</p>
         </div>
       </div>
-      <div class="flow">
-        <div>Define reality</div>
-        <div>Assess the gap</div>
-        <div>Reframe risk</div>
-        <div>Execute entry</div>
+      <div class="flow" aria-label="DARE execution loop">
+        <div>Define the real system</div>
+        <div>Assess the accountability gap</div>
+        <div>Reframe risk into ownership</div>
+        <div>Execute through advisory entry</div>
       </div>
     </section>
 
-    <section>
+    <section id="scorecard">
       <h2>SHT Scorecard</h2>
+      <p class="section-lead">The SHT read shows a structural tension: platform capability is credible, but regulatory independence and narrative transparency sit below the extraction signal threshold.</p>
       <div class="card image-card">
-        <img src="visuals/teradata_sht_fred_analysis.png" alt="SHT Analysis Teradata systemic harm threshold scorecard" onerror="this.src='teradata_sht_fred_analysis.png'" />
+        <img src="visuals/teradata_sht_fred_analysis.png" alt="SHT Analysis Teradata systemic harm threshold scorecard showing total score 61 out of 100 and extraction emerging status" onerror="this.src='teradata_sht_fred_analysis.png'" />
       </div>
     </section>
 
     <section class="two-col">
       <div class="card">
         <h2>Core Finding</h2>
-        <p>Public positioning supports Teradata's platform governance capability. It does not publicly confirm a required client side operations sponsor embedded in the engagement model.</p>
-        <p>That distinction matters because the regulatory direction of travel requires named human accountability, not only automated controls.</p>
+        <p>Public positioning supports Teradata's platform governance capability. It does not publicly confirm a required client-side operations sponsor embedded in the engagement model.</p>
+        <p>That distinction matters because the regulatory direction of travel requires named human accountability, not only automated controls or model guardrails.</p>
       </div>
       <div class="card">
         <h2>Conversation Hook</h2>
-        <div class="callout">The gap I am seeing is not whether Teradata can govern models at the platform layer. The gap is whether the client has a named operations sponsor responsible for closing the post deployment accountability loop.</div>
+        <div class="callout">The gap I am seeing is not whether Teradata can govern models at the platform layer. The gap is whether the client has a named operations sponsor responsible for closing the post-deployment accountability loop.</div>
       </div>
     </section>
 
-    <section>
+    <section id="evidence">
+      <h2>Evidence Delta</h2>
+      <p class="section-lead">The brief separates claimed capability from verifiable evidence and required accountability. That delta is the advisory opening.</p>
+      <div class="delta">
+        <div class="delta-box">
+          <h3>Claimed or Visible</h3>
+          <p>Guardrails, evaluations, compliance checks, platform governance language, human-in-the-loop language, and autonomous AI deployment positioning.</p>
+        </div>
+        <div class="delta-arrow" aria-hidden="true">→</div>
+        <div class="delta-box">
+          <h3>Missing or Unconfirmed</h3>
+          <p>Required client-side operations sponsor, explicit Measure-to-Manage owner, named post-deployment review loop, and accountable drift response mechanism.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack">
       <h2>Framework Stack</h2>
+      <p class="section-lead">Each layer has a specific job. Together they convert a complex AI governance story into a defendable executive conversation.</p>
       <table>
         <thead>
-          <tr><th>Layer</th><th>Role</th><th>Client Value</th></tr>
+          <tr><th>Layer</th><th>Role</th><th>Client Value</th><th>Teradata Application</th></tr>
         </thead>
         <tbody>
-          <tr><td>ESIL</td><td>External Signal Intelligence Layer</td><td>Validates claims against regulatory, academic, and market signals</td></tr>
-          <tr><td>MOC</td><td>Model of Constraint</td><td>Identifies the binding bottleneck</td></tr>
-          <tr><td>CES</td><td>Composite Enforcement Score</td><td>Tests whether criteria remain valid under changing conditions</td></tr>
-          <tr><td>SHT</td><td>Systemic Harm Threshold</td><td>Scores structural dependency and extraction risk</td></tr>
-          <tr><td>DARE</td><td>AI Adoption Intelligence</td><td>Turns complexity into an executive entry point</td></tr>
-          <tr><td>EBT</td><td>Evaluative Bias Transference</td><td>Flags accountability laundering and compliance as cover</td></tr>
+          <tr><td>ESIL</td><td>External Signal Intelligence Layer</td><td>Validates claims against regulatory, academic, and market signals</td><td>Separates public governance claims from missing accountability evidence</td></tr>
+          <tr><td>MOC</td><td>Mechanism of Constraint</td><td>Identifies the binding bottleneck</td><td>Classifies the constraint as T3 Governance, amplified by T2 Market pressure</td></tr>
+          <tr><td>CES</td><td>Criteria Evaluation System</td><td>Tests whether decision criteria remain valid under changing conditions</td><td>Flags platform-valid but accountability-incomplete governance criteria</td></tr>
+          <tr><td>SHT</td><td>Systemic Harm Threshold</td><td>Scores dependency, extraction, and structural alignment risk</td><td>Shows 61/100 with regulatory and narrative breach signals</td></tr>
+          <tr><td>DARE</td><td>AI adoption intelligence layer</td><td>Turns complexity into an executive entry point</td><td>Creates the ownership-gap conversation wedge</td></tr>
+          <tr><td>EBT</td><td>Evaluative Bias Transference</td><td>Flags accountability laundering and compliance-as-cover risk</td><td>Identifies where governance language may outpace ownership design</td></tr>
         </tbody>
       </table>
     </section>
 
+    <section>
+      <h2>Repository Architecture</h2>
+      <p class="section-lead">The repo is structured as an advisory operating system: public-facing brief, evidence layer, framework definitions, visual proof, and client-ready executive brief.</p>
+      <div class="repo-map" role="img" aria-label="Repository architecture tree">
+<pre>domenic-terradata-meeting/
+├── README.md                         Executive thesis and repo map
+├── index.html                        Public client-facing GitHub Pages brief
+├── output/
+│   ├── teradata-ai-governance-stress-test.md
+│   ├── evidence-delta-block.md       Evidence classification and provenance
+│   └── priority-action-stack.md      Advisory execution path
+├── visuals/
+│   └── teradata_sht_fred_analysis.png
+├── frameworks/
+│   ├── dare-layer.md                 Decision compression and entry layer
+│   ├── esil-v1.md                    External signal validation layer
+│   ├── sht-scorecard.md              Systemic threshold score logic
+│   ├── ces-layer.md                  Criteria validity and regime shift layer
+│   └── moc-layer.md                  Constraint identification layer
+└── client-briefs/
+    └── domenic-teradata-executive-brief.md</pre>
+      </div>
+    </section>
+
+    <section id="sprint">
+      <h2>Suggested 4 Week Accountability Sprint</h2>
+      <p class="section-lead">The sprint is designed to keep the engagement advisory and executive-facing. It does not require installing into Teradata systems. It maps the governance accountability layer around the platform.</p>
+      <div class="timeline">
+        <div class="step"><h3>Governance Signal Scan</h3><p>Map public, client-facing, and operating signals into a current-state accountability baseline.</p></div>
+        <div class="step"><h3>Decision Loop Review</h3><p>Identify where Measure-to-Manage ownership breaks, weakens, or becomes assumed.</p></div>
+        <div class="step"><h3>Sponsor Blueprint</h3><p>Define operations sponsor role, escalation path, cadence, decision rights, and evidence capture.</p></div>
+        <div class="step"><h3>Executive Synthesis</h3><p>Deliver a board-ready accountability architecture brief with action stack and next-step options.</p></div>
+      </div>
+    </section>
+
     <section class="cta">
       <h2>Suggested Next Step</h2>
-      <p>A focused 4 week paid sprint can map the current AI governance accountability loop, identify where platform controls stop, define the operations sponsor role, and produce a board ready accountability architecture brief.</p>
-      <a class="button" href="mailto:?subject=AI Governance Accountability Brief&body=I wanted to share this executive brief on automated governance versus accountability architecture.">Share Brief</a>
+      <p>Use the operations sponsor gap as the opening question. From there, position a focused 4 week paid sprint that maps where platform controls stop, where client accountability begins, and what governance ownership must look like before AI deployment risk scales.</p>
+      <div class="button-row">
+        <a class="button" href="mailto:?subject=AI Governance Accountability Brief&body=Sharing this executive brief on automated governance versus accountability architecture.">Share Brief</a>
+        <a class="button secondary" href="README.md">View README</a>
+        <a class="button secondary" href="client-briefs/domenic-teradata-executive-brief.md">Executive Brief</a>
+      </div>
     </section>
   </main>
 
   <footer class="wrap">
-    <div>McDonald (2026) | Epoch Frameworks LLC | DACR License v2.6</div>
-    <div>Decision support instrument. Not a third party audited measurement.</div>
+    <div class="fineprint">
+      <div><strong>McDonald (2026)</strong> | Epoch Frameworks LLC | DACR License v2.6</div>
+      <div>Decision-support instrument. Not a third-party audited measurement.</div>
+      <div>Prepared for executive AI governance accountability discussion. Public-signal analysis should be validated against client-provided evidence before operational reliance.</div>
+    </div>
   </footer>
 </body>
 </html>
