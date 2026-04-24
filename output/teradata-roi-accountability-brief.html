@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teradata AI ROI Accountability Brief — Epoch Frameworks LLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f5f0e8;
+    --accent: #c8392b;
+    --gold: #b8860b;
+    --amber: #e8a020;
+    --steel: #2c3e50;
+    --mist: #e8e2d4;
+    --rule: rgba(10,10,10,0.10);
+    --green: #1a7a4a;
+    --red: #c8392b;
+    --orange: #d4691a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 52px 64px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: 'ROI';
+    position: absolute;
+    right: -10px;
+    top: -30px;
+    font-family: 'Playfair Display', serif;
+    font-size: 240px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.03);
+    letter-spacing: -8px;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+
+  .header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4.5vw, 58px);
+    font-weight: 900;
+    line-height: 1.06;
+    color: var(--paper);
+    margin-bottom: 6px;
+  }
+
+  .header-title span { color: var(--accent); }
+
+  .header-subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(245,240,232,0.45);
+    text-transform: uppercase;
+    margin-top: 14px;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 36px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(245,240,232,0.1);
+    flex-wrap: wrap;
+  }
+
+  .meta-item { display: flex; flex-direction: column; gap: 4px; }
+
+  .meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.35);
+  }
+
+  .meta-value {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--paper);
+  }
+
+  /* ── VERDICT STRIP ── */
+  .verdict-strip {
+    background: var(--accent);
+    padding: 18px 64px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .verdict-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    white-space: nowrap;
+  }
+
+  .verdict-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    font-style: italic;
+  }
+
+  .verdict-badge {
+    margin-left: auto;
+    background: rgba(0,0,0,0.25);
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    padding: 5px 14px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* ── MAIN ── */
+  .main { padding: 0 64px 80px; }
+
+  /* ── SECTION HEADERS ── */
+  .section-header {
+    padding: 48px 0 32px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 40px;
+    align-items: end;
+  }
+
+  .section-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: var(--mist);
+    line-height: 1;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 2.5vw, 32px);
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .section-title span { color: var(--accent); }
+
+  .section-desc {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(10,10,10,0.4);
+  }
+
+  /* ── KPI STRIP ── */
+  .kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--rule);
+    margin-bottom: 40px;
+  }
+
+  .kpi-cell {
+    padding: 28px 24px;
+    border-right: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .kpi-cell:last-child { border-right: none; }
+
+  .kpi-cell.alert { background: #fdf0ef; }
+  .kpi-cell.warn  { background: #fdf7ed; }
+  .kpi-cell.ok    { background: #edf7f2; }
+
+  .kpi-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(10,10,10,0.4);
+    margin-bottom: 10px;
+  }
+
+  .kpi-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .kpi-value.red   { color: var(--accent); }
+  .kpi-value.amber { color: var(--amber); }
+  .kpi-value.green { color: var(--green); }
+  .kpi-value.steel { color: var(--steel); }
+
+  .kpi-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: rgba(10,10,10,0.5);
+    line-height: 1.4;
+  }
+
+  .kpi-tag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 1px;
+    padding: 2px 7px;
+    text-transform: uppercase;
+  }
+
+  .kpi-tag.red   { background: #fde8e6; color: var(--accent); border: 1px solid #f5c0bc; }
+  .kpi-tag.amber { background: #fdf0d5; color: var(--orange); border: 1px solid #f5d99a; }
+  .kpi-tag.green { background: #e0f5ea; color: var(--green); border: 1px solid #9dd4b8; }
+
+  /* ── EVIDENCE CARDS ── */
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .evidence-card {
+    border: 1px solid var(--rule);
+    background: #fff;
+    padding: 28px;
+  }
+
+  .evidence-card.full { grid-column: span 2; }
+
+  .card-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .card-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .card-dot.red   { background: var(--accent); }
+  .card-dot.amber { background: var(--amber); }
+  .card-dot.green { background: var(--green); }
+  .card-dot.steel { background: var(--steel); }
+
+  .card-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(10,10,10,0.4);
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  .card-body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    line-height: 1.75;
+    color: rgba(10,10,10,0.65);
+  }
+
+  .card-body strong { color: var(--ink); font-weight: 600; }
+
+  .card-source {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--rule);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: rgba(10,10,10,0.35);
+  }
+
+  /* ── VERDICT TABLE ── */
+  .verdict-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+    font-size: 13px;
+  }
+
+  .verdict-table th {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 400;
+  }
+
+  .verdict-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: rgba(10,10,10,0.7);
+    line-height: 1.5;
+  }
+
+  .verdict-table tr:nth-child(even) td { background: #fafaf7; }
+
+  .verdict-table td:first-child {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .tag-pill {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 1px;
+    padding: 2px 8px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .tag-pill.red    { background: #fde8e6; color: var(--accent); border: 1px solid #f5c0bc; }
+  .tag-pill.amber  { background: #fdf0d5; color: var(--orange); border: 1px solid #f5d99a; }
+  .tag-pill.green  { background: #e0f5ea; color: var(--green);  border: 1px solid #9dd4b8; }
+  .tag-pill.steel  { background: #e8ecf0; color: var(--steel);  border: 1px solid #b8c4cc; }
+
+  /* ── BENCHMARK BAR ── */
+  .benchmark-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 14px;
+    padding: 14px 20px;
+    border: 1px solid var(--rule);
+    background: #fff;
+  }
+
+  .benchmark-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--ink);
+    width: 200px;
+    flex-shrink: 0;
+    font-weight: 500;
+  }
+
+  .benchmark-bar-wrap {
+    flex: 1;
+    background: var(--mist);
+    height: 8px;
+    position: relative;
+    border-radius: 1px;
+  }
+
+  .benchmark-bar-fill {
+    height: 100%;
+    border-radius: 1px;
+    transition: width 0.8s ease;
+  }
+
+  .benchmark-pct {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    width: 48px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .benchmark-tag {
+    width: 100px;
+    flex-shrink: 0;
+  }
+
+  /* ── ESIL BLOCK ── */
+  .esil-block {
+    margin-top: 56px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 40px 48px;
+  }
+
+  .esil-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(245,240,232,0.1);
+  }
+
+  .esil-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .esil-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--paper);
+  }
+
+  .esil-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 28px;
+  }
+
+  .esil-col-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.35);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(245,240,232,0.1);
+  }
+
+  .esil-item {
+    margin-bottom: 10px;
+  }
+
+  .esil-item-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--accent);
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+
+  .esil-item-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: rgba(245,240,232,0.65);
+    line-height: 1.5;
+  }
+
+  .esil-provenance {
+    border-top: 1px solid rgba(245,240,232,0.1);
+    padding-top: 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: rgba(245,240,232,0.35);
+    line-height: 1.8;
+  }
+
+  .esil-provenance strong {
+    color: rgba(245,240,232,0.6);
+  }
+
+  /* ── CLAIM TAGS ── */
+  .claim {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 1px;
+    padding: 1px 6px;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+
+  .claim.pub    { background: rgba(26,122,74,0.25);  color: #5dd49a; border: 1px solid rgba(26,122,74,0.4); }
+  .claim.inf    { background: rgba(232,160,32,0.2);  color: #f0bc56; border: 1px solid rgba(232,160,32,0.4); }
+  .claim.hyp    { background: rgba(200,57,43,0.2);   color: #f08075; border: 1px solid rgba(200,57,43,0.4); }
+
+  /* ── POSITIONING STRIP ── */
+  .positioning-strip {
+    margin-top: 48px;
+    background: var(--steel);
+    color: var(--paper);
+    padding: 44px 52px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 52px;
+    align-items: center;
+  }
+
+  .strip-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.35);
+    margin-bottom: 14px;
+  }
+
+  .strip-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--paper);
+  }
+
+  .strip-heading span { color: var(--accent); }
+
+  .strip-points { display: flex; flex-direction: column; gap: 14px; }
+
+  .strip-point { display: flex; align-items: flex-start; gap: 14px; }
+
+  .strip-point-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    padding-top: 2px;
+    flex-shrink: 0;
+    letter-spacing: 1px;
+  }
+
+  .strip-point-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(245,240,232,0.75);
+  }
+
+  /* ── FOOTER ── */
+  .doc-footer {
+    padding: 24px 64px;
+    border-top: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--paper);
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .footer-brand span { color: var(--accent); }
+
+  .footer-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(10,10,10,0.35);
+    text-align: right;
+  }
+
+  /* ── DIVIDER ── */
+  .rule-line {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 32px 0;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .kpi-strip, .evidence-card, .benchmark-row {
+    animation: fadeInUp 0.5s ease both;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .header, .main { padding-left: 24px; padding-right: 24px; }
+    .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+    .evidence-grid { grid-template-columns: 1fr; }
+    .evidence-card.full { grid-column: span 1; }
+    .section-header { grid-template-columns: 80px 1fr; gap: 16px; }
+    .section-number { font-size: 48px; }
+    .positioning-strip { grid-template-columns: 1fr; gap: 24px; padding: 32px 24px; }
+    .esil-grid { grid-template-columns: 1fr; gap: 24px; }
+    .verdict-strip { padding: 16px 24px; flex-wrap: wrap; }
+    .verdict-badge { margin-left: 0; }
+    .doc-footer { padding: 20px 24px; flex-direction: column; gap: 12px; text-align: center; }
+    .benchmark-label { width: 140px; font-size: 9px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-eyebrow">Epoch Frameworks LLC — AI ROI Accountability Brief</div>
+  <div class="header-title">Is Teradata Inside the<br><span>50% Problem?</span></div>
+  <div class="header-subtitle">S&P 500 AI ROI Benchmark · DARE Framework · ESIL v1.0 Evidence Delta</div>
+  <div class="header-meta">
+    <div class="meta-item">
+      <div class="meta-label">Prepared By</div>
+      <div class="meta-value">Erwin Maurice McDonald</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Target</div>
+      <div class="meta-value">Domenic Ravita, VP — Teradata</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Framework</div>
+      <div class="meta-value">DARE · ESIL v1.0 · MOC v4.6 · CES</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Evidence Class</div>
+      <div class="meta-value">Public-Verified · SEC / Earnings / Industry Research</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Date</div>
+      <div class="meta-value">April 25, 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- VERDICT STRIP -->
+<div class="verdict-strip">
+  <div class="verdict-label">Core Finding</div>
+  <div class="verdict-text">Teradata has invested $216M in R&D (2024), claims 427% ROI from its own platform — yet its own revenue has declined four consecutive years while 95% of enterprise AI pilots it supports fail to reach production. The accountability loop is broken at the client layer.</div>
+  <div class="verdict-badge">⚠ Accountability Gap Confirmed</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- SECTION 01: TERADATA FINANCIAL SIGNAL -->
+  <div class="section-header">
+    <div class="section-number">01</div>
+    <div>
+      <div class="section-title">Teradata <span>Financial Signal</span><br>The Platform Governance vs. Revenue Paradox</div>
+      <div class="section-desc">DARE Layer D — Data Insight Edge · Public-Verified from SEC Filings, Earnings Calls, StockAnalysis.com</div>
+    </div>
+  </div>
+
+  <div class="kpi-strip">
+    <div class="kpi-cell alert">
+      <div class="kpi-tag red">Alert</div>
+      <div class="kpi-label">2024 Annual Revenue</div>
+      <div class="kpi-value red">$1.75B</div>
+      <div class="kpi-sub">Down 4.5% YoY. 4th consecutive year of decline. Revenue forecast: flat for next 3 years vs. 12% software industry growth.</div>
+    </div>
+    <div class="kpi-cell alert">
+      <div class="kpi-tag red">Alert</div>
+      <div class="kpi-label">Q1 2025 Revenue</div>
+      <div class="kpi-value red">−10%</div>
+      <div class="kpi-sub">$418M vs. $465M Q1 2024. Recurring revenue (86% of total) down 8% YoY. Free cash flow collapsed from $21M to $7M.</div>
+    </div>
+    <div class="kpi-cell warn">
+      <div class="kpi-tag amber">Watch</div>
+      <div class="kpi-label">2024 R&amp;D Spend (AI)</div>
+      <div class="kpi-value amber">$216M</div>
+      <div class="kpi-sub">Full-year R&D investment. Powers ClearScape Analytics, AI Unlimited, VantageCloud hybrid cloud. Growing spend, declining revenue.</div>
+    </div>
+    <div class="kpi-cell ok">
+      <div class="kpi-tag green">Claim</div>
+      <div class="kpi-label">Nucleus Research ROI (Self-Reported)</div>
+      <div class="kpi-value green">427%</div>
+      <div class="kpi-sub">3-year avg ROI claimed for VantageCloud customers. 11-month payback period. Commissioned by Teradata. Methodology: selected customer interviews.</div>
+    </div>
+  </div>
+
+  <!-- THE PARADOX -->
+  <div class="evidence-grid">
+    <div class="evidence-card">
+      <div class="card-eyebrow">
+        <div class="card-dot red"></div>
+        <div class="card-tag">Signal 1 — Revenue Reality</div>
+      </div>
+      <div class="card-title">The platform claims 427% ROI.<br>The company is losing revenue.</div>
+      <div class="card-body">
+        Teradata's commissioned Nucleus Research study (July 2025) reports average 3-year ROI of 427% and payback in under 12 months for VantageCloud customers. <strong>Yet total ARR declined 4% YoY in constant currency, with the company averaging 17.4% YoY ARR declines across the last four quarters.</strong> Customer acquisition cost payback is 52.6 months — nearly 5 years. These two data sets cannot both be right. Either the ROI claim is confined to a selected subset of customers, or the governance and adoption layer required to realize that ROI is not being deployed at scale.
+      </div>
+      <div class="card-source">SOURCE: Nucleus Research (Jul 2025) · StockStory.org Q4 2024 Earnings Analysis · Teradata Investor Relations · [PUBLIC-VERIFIED]</div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-eyebrow">
+        <div class="card-dot amber"></div>
+        <div class="card-tag">Signal 2 — Teradata's Own Admission</div>
+      </div>
+      <div class="card-title">95% of enterprise AI pilots fail. Teradata said it.</div>
+      <div class="card-body">
+        In a press release dated October 28, 2025, Teradata's own AI Services announcement stated: <strong>"Despite billions invested, 95% of enterprise AI pilots fail due to poor prioritization, governance, and execution — not technology limitations."</strong> This is the company diagnosing the exact accountability architecture problem your engagement is built to solve. Teradata knows the failure mode. It does not appear to have installed a named client-side operations sponsor as a required component of its engagement model to close it.
+      </div>
+      <div class="card-source">SOURCE: Teradata Press Release, Oct 28 2025 — "Teradata AI Services Deliver Production-Ready Agentic Use Cases" · teradata.com · [PUBLIC-VERIFIED]</div>
+    </div>
+
+    <div class="evidence-card full">
+      <div class="card-eyebrow">
+        <div class="card-dot steel"></div>
+        <div class="card-tag">Signal 3 — The Governance Theater Pattern</div>
+      </div>
+      <div class="card-title">Strong platform governance language. No named client-side operations sponsor visible in the engagement model.</div>
+      <div class="card-body">
+        CEO Steve McMillan stated in Q3 2025 earnings: <em>"We believe Teradata is the best autonomous AI and knowledge platform for agentic workloads."</em> The platform governance stack is real — ClearScape Analytics has 150+ in-database functions, ModelOps for open-source ONNX models, Azure OpenAI / Amazon Bedrock / Google Gemini integrations (July 2025). <strong>What is not visible in public positioning: a required client-side accountability layer. No named operations sponsor. No post-deployment criteria review cadence. No "Measure to Manage" loop owner embedded as a standard engagement component.</strong> Automated governance is not the same as accountability architecture. The platform can run guardrails. It cannot own the business decision when conditions change.
+      </div>
+      <div class="card-source">SOURCE: Teradata Q3 2025 Earnings Transcript (Investing.com, Nov 4 2025) · Teradata Q1 2025 Slides · Teradata.com AI Services · [PUBLIC-VERIFIED] + [INFERRED-PUBLIC — operations sponsor absence]</div>
+    </div>
+  </div>
+
+  <!-- SECTION 02: S&P 500 BENCHMARK -->
+  <div class="section-header">
+    <div class="section-number">02</div>
+    <div>
+      <div class="section-title">The <span>50% Problem</span><br>Where Teradata Sits in the S&amp;P 500 AI ROI Landscape</div>
+      <div class="section-desc">DARE Layer R — Risk & Disruption Readiness · ESIL Academic + Market Signal Layer</div>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 32px;">
+    <div class="benchmark-row" style="animation-delay: 0.05s;">
+      <div class="benchmark-label">AI Risk Disclosure — S&P 500</div>
+      <div class="benchmark-bar-wrap">
+        <div class="benchmark-bar-fill" style="width:83%; background: var(--accent);"></div>
+      </div>
+      <div class="benchmark-pct" style="color:var(--accent);">83%</div>
+      <div class="benchmark-tag"><span class="tag-pill red">Public-Verified</span></div>
+    </div>
+    <div class="benchmark-row" style="animation-delay: 0.1s;">
+      <div class="benchmark-label">Boards with AI Expertise (S&P 500)</div>
+      <div class="benchmark-bar-wrap">
+        <div class="benchmark-bar-fill" style="width:2.7%; background: var(--amber);"></div>
+      </div>
+      <div class="benchmark-pct" style="color:var(--amber);">2.7%</div>
+      <div class="benchmark-tag"><span class="tag-pill amber">Critical Gap</span></div>
+    </div>
+    <div class="benchmark-row" style="animation-delay: 0.15s;">
+      <div class="benchmark-label">Exec boards "highly fluent" in AI</div>
+      <div class="benchmark-bar-wrap">
+        <div class="benchmark-bar-fill" style="width:23%; background: var(--amber);"></div>
+      </div>
+      <div class="benchmark-pct" style="color:var(--amber);">23%</div>
+      <div class="benchmark-tag"><span class="tag-pill amber">Conference Board</span></div>
+    </div>
+    <div class="benchmark-row" style="animation-delay: 0.2s;">
+      <div class="benchmark-label">Enterprise AI pilots that fail (MIT / industry)</div>
+      <div class="benchmark-bar-wrap">
+        <div class="benchmark-bar-fill" style="width:95%; background: var(--accent);"></div>
+      </div>
+      <div class="benchmark-pct" style="color:var(--accent);">95%</div>
+      <div class="benchmark-tag"><span class="tag-pill red">Teradata-cited</span></div>
+    </div>
+    <div class="benchmark-row" style="animation-delay: 0.25s;">
+      <div class="benchmark-label">Companies w/ clear AI strategy (Gallup 2024)</div>
+      <div class="benchmark-bar-wrap">
+        <div class="benchmark-bar-fill" style="width:15%; background: var(--amber);"></div>
+      </div>
+      <div class="benchmark-pct" style="color:var(--amber);">15%</div>
+      <div class="benchmark-tag"><span class="tag-pill amber">Inferred-Public</span></div>
+    </div>
+    <div class="benchmark-row" style="animation-delay: 0.3s;">
+      <div class="benchmark-label">AI-mature companies (McKinsey full ROI)</div>
+      <div class="benchmark-bar-wrap">
+        <div class="benchmark-bar-fill" style="width:1%; background: var(--accent);"></div>
+      </div>
+      <div class="benchmark-pct" style="color:var(--accent);">1%</div>
+      <div class="benchmark-tag"><span class="tag-pill red">McKinsey 2025</span></div>
+    </div>
+    <div class="benchmark-row" style="animation-delay: 0.35s;">
+      <div class="benchmark-label">Orgs reviewing AI-generated content before use</div>
+      <div class="benchmark-bar-wrap">
+        <div class="benchmark-bar-fill" style="width:27%; background: var(--steel);"></div>
+      </div>
+      <div class="benchmark-pct" style="color:var(--steel);">27%</div>
+      <div class="benchmark-tag"><span class="tag-pill steel">McKinsey / Aristek</span></div>
+    </div>
+  </div>
+
+  <div class="evidence-grid">
+    <div class="evidence-card">
+      <div class="card-eyebrow">
+        <div class="card-dot red"></div>
+        <div class="card-tag">Conference Board — April 22, 2026</div>
+      </div>
+      <div class="card-title">83% of S&P 500 disclose AI risk. 2.7% of boards have AI expertise to govern it.</div>
+      <div class="card-body">
+        A report released two days ago by The Conference Board, based on S&P 500 disclosure data through December 2025, confirmed the board-level AI governance gap is <strong>structural and widening.</strong> AI risk disclosure jumped from 12% to 83% of S&amp;P 500 companies between 2023 and 2025. Director AI expertise grew from 1.5% to 2.7% over the same period. Andrew Jones, Principal Researcher: <em>"Many companies have moved quickly to recognize AI as a material risk, but they are still working through who owns oversight, how issues are escalated, and what level of board fluency is needed."</em> That sentence is the G-dimension gap in three clauses.
+      </div>
+      <div class="card-source">SOURCE: The Conference Board via Morningstar/PR Newswire, Apr 22 2026 · [PUBLIC-VERIFIED — 2 days old]</div>
+    </div>
+
+    <div class="evidence-card">
+      <div class="card-eyebrow">
+        <div class="card-dot amber"></div>
+        <div class="card-tag">McKinsey / Gartner — 2025</div>
+      </div>
+      <div class="card-title">Only 1% of companies are AI mature. Gartner: AI is in the Trough of Disillusionment.</div>
+      <div class="card-body">
+        McKinsey (2025) estimates <strong>only 1% of companies are fully integrating AI into workflows and generating financial returns.</strong> Gartner classified AI as entering the Trough of Disillusionment by mid-2025. The Gallup/McKinsey data shows 92% of executives plan to increase AI spending even as less than 30% report that their companies can measure AI ROI. This is the investment-accountability gap at enterprise scale — and it is the exact dynamic Teradata's own revenue decline reflects from the vendor side.
+      </div>
+      <div class="card-source">SOURCE: McKinsey State of AI 2025 · Gartner Hype Cycle 2025 · Gallup Workplace Survey Q4 2024 · [PUBLIC-VERIFIED]</div>
+    </div>
+  </div>
+
+  <!-- SECTION 03: DARE VERDICT TABLE -->
+  <div class="section-header">
+    <div class="section-number">03</div>
+    <div>
+      <div class="section-title">DARE <span>Verdict Table</span><br>Teradata Through the Four-Layer Lens</div>
+      <div class="section-desc">DARE Framework Applied · D: Data · A: Agility · R: Risk · E: Evolution</div>
+    </div>
+  </div>
+
+  <table class="verdict-table">
+    <thead>
+      <tr>
+        <th>DARE Dim.</th>
+        <th>The Question</th>
+        <th>What the Evidence Shows</th>
+        <th>Accountability Gap</th>
+        <th>Signal Tag</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>D — Data</td>
+        <td>Is Teradata turning its own platform telemetry into governed decisions?</td>
+        <td>150+ ClearScape in-database functions. Model deployment time cut from 5 months to 1 week in cited cases. Strong platform-layer data intelligence. Revenue declining while AI investment grows.</td>
+        <td>No public evidence of a named internal owner who routes platform intelligence to Teradata's own executive decisions. The gap they diagnose in clients appears to exist internally.</td>
+        <td><span class="tag-pill amber">Inferred-Public</span></td>
+      </tr>
+      <tr>
+        <td>A — Agility</td>
+        <td>Are Teradata's strategic AI assumptions still valid for 2026 market conditions?</td>
+        <td>Pivoted to cloud-first in 2021. Enterprise Vector Store launched 2025. Amazon Bedrock / NVIDIA / AWS partnerships added 2024–2025. CAC payback: 52.6 months — 4x longer than industry benchmark.</td>
+        <td>Cloud ARR growing 11–15% but total ARR declining. On-prem retention problem unresolved. The assumption that cloud migration compensates for on-prem attrition has not yet proven out in revenue.</td>
+        <td><span class="tag-pill red">Alert</span></td>
+      </tr>
+      <tr>
+        <td>R — Risk</td>
+        <td>Is Teradata governing AI as a compliance exercise or as an accountability architecture?</td>
+        <td>AI guardrails, ModelOps, ONNX support, responsible AI language present. ClearScape Analytics positioned as governed analytics layer. No public evidence of a named client-side operations sponsor requirement in engagement design.</td>
+        <td>Teradata's own press release (Oct 2025) confirms 95% of AI pilots fail due to governance and accountability gaps — not technology. Their platform addresses technology. The accountability ownership layer is the gap.</td>
+        <td><span class="tag-pill red">Public-Verified</span></td>
+      </tr>
+      <tr>
+        <td>E — Evolution</td>
+        <td>Is Teradata positioned as a disruptor or as a sophisticated responder to disruption that has already happened?</td>
+        <td>CEO McMillan: "We believe Teradata is the best autonomous AI and knowledge platform for agentic workloads." Snowflake and Databricks gained market share. Teradata ARR declined 61.2% YoY in Q4 2024 in one measure.</td>
+        <td>The company is building toward a disruptor narrative (autonomous AI, agentic workloads) while losing revenue share. The evolution layer is real in product roadmap but not yet reflected in market validation. The accountability advisory layer — who governs post-deployment — is the differentiator that could change this.</td>
+        <td><span class="tag-pill amber">Inferred-Public</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- POSITIONING STRIP -->
+  <div class="positioning-strip">
+    <div>
+      <div class="strip-label">The Consulting Entry Point</div>
+      <div class="strip-heading">You are not selling<br>a platform layer.<br>You are selling the<br><span>accountability owner</span><br>the platform cannot be.
+      </div>
+    </div>
+    <div class="strip-points">
+      <div class="strip-point">
+        <div class="strip-point-num">01 —</div>
+        <div class="strip-point-text">Teradata's own published data confirms the problem: 95% of AI pilots fail due to governance and accountability gaps, not technology. The platform is not the bottleneck. The named human owner of the post-deployment loop is.</div>
+      </div>
+      <div class="strip-point">
+        <div class="strip-point-num">02 —</div>
+        <div class="strip-point-text">The S&P 500 data confirms the gap is category-wide: 83% of boards disclose AI risk. 2.7% have the board-level expertise to govern it. The accountability architecture gap is not Teradata-specific — it is the market gap your engagement closes.</div>
+      </div>
+      <div class="strip-point">
+        <div class="strip-point-num">03 —</div>
+        <div class="strip-point-text">Domenic walks into a company spending $216M/year on AI R&D with declining revenue and a 52.6-month customer acquisition payback. The question for him is not whether the platform works. The question is who owns the loop when it doesn't — and whether that person is named, empowered, and accountable before deployment, not after the incident report.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESIL EVIDENCE DELTA BLOCK -->
+  <div class="esil-block">
+    <div class="esil-header">
+      <div>
+        <div class="esil-title">ESIL v1.0 — External Signal Intelligence Layer</div>
+        <div class="esil-heading">Evidence Delta Block — Teradata AI ROI Brief</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-family:'DM Mono',monospace; font-size:9px; color:rgba(245,240,232,0.35); letter-spacing:2px;">TOTAL SOURCES SCANNED</div>
+        <div style="font-family:'Playfair Display',serif; font-size:32px; font-weight:900; color:var(--accent);">15+</div>
+        <div style="font-family:'DM Mono',monospace; font-size:9px; color:rgba(245,240,232,0.35);">ACROSS 3 RESEARCH LANES</div>
+      </div>
+    </div>
+
+    <div class="esil-grid">
+      <div>
+        <div class="esil-col-label">Regulatory Anchors</div>
+        <div class="esil-item">
+          <div class="esil-item-label">NIST AI RMF — Govern / Measure / Manage</div>
+          <div class="esil-item-text">Post-deployment accountability loop maps to Manage function. Named operations sponsor maps to Govern function. Platform guardrails alone do not satisfy Manage-function requirements.</div>
+        </div>
+        <div class="esil-item">
+          <div class="esil-item-label">ISO/IEC 42001 — Clause 9 (Performance Evaluation)</div>
+          <div class="esil-item-text">Requires documented performance monitoring of AI systems post-deployment. No public evidence Teradata requires this as a client-side engagement condition.</div>
+        </div>
+        <div class="esil-item">
+          <div class="esil-item-label">EU AI Act — High-Risk AI Human Oversight</div>
+          <div class="esil-item-text">High-risk AI systems require named human oversight roles. The gap between platform governance and named accountability owner is precisely what Articles 9 and 14 address.</div>
+        </div>
+        <div class="esil-item">
+          <div class="esil-item-label">Conference Board — S&P 500 AI Disclosure (Apr 22, 2026)</div>
+          <div class="esil-item-text">83% AI risk disclosure / 2.7% board AI expertise. G-dimension gap externally validated. Two days old at time of brief production.</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="esil-col-label">Academic Anchors</div>
+        <div class="esil-item">
+          <div class="esil-item-label">MIT Research — Trust, Not Tech (9,000+ workers)</div>
+          <div class="esil-item-text">Automation success depends more on whether the team believes in the governance structure than which platform is chosen. Directly confirms the human accountability layer as the binding constraint.</div>
+        </div>
+        <div class="esil-item">
+          <div class="esil-item-label">Edmondson — Psychological Safety</div>
+          <div class="esil-item-text">Feedback loop precondition. Without psychological safety, post-deployment variance signals do not surface to the operations sponsor — or there is no operations sponsor to surface them to.</div>
+        </div>
+        <div class="esil-item">
+          <div class="esil-item-label">McKinsey — AI Maturity (1% fully AI-mature)</div>
+          <div class="esil-item-text">External validation that AI ROI realization is a governance and accountability problem, not a tooling problem. 99% of enterprises are not realizing full AI ROI regardless of platform spend.</div>
+        </div>
+        <div class="esil-item">
+          <div class="esil-item-label">CMR AI Governance Maturity Matrix (May 2025)</div>
+          <div class="esil-item-text">Only 14% of boards regularly discuss AI. Front-of-house governance gap is not Teradata-specific. It is the category-defining failure mode.</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="esil-col-label">Live Market Signals</div>
+        <div class="esil-item">
+          <div class="esil-item-label">Teradata 2024 Annual Report + 10-K</div>
+          <div class="esil-item-text">$216M R&D spend · $1.75B revenue (−4.5%) · ClearScape Analytics enhancements confirmed · [PUBLIC-VERIFIED]</div>
+        </div>
+        <div class="esil-item">
+          <div class="esil-item-label">Teradata Q4 2024 Earnings (Feb 11, 2025)</div>
+          <div class="esil-item-text">Revenue −10.5% YoY · ARR −61.2% YoY · CAC payback 52.6 months · Stock −12.5% post-earnings · [PUBLIC-VERIFIED]</div>
+        </div>
+        <div class="esil-item">
+          <div class="esil-item-label">Teradata Press Release — Oct 28, 2025</div>
+          <div class="esil-item-text">"95% of enterprise AI pilots fail due to poor governance and execution — not technology." Self-published accountability gap diagnosis · [PUBLIC-VERIFIED]</div>
+        </div>
+        <div class="esil-item">
+          <div class="esil-item-label">Teradata Q3 2025 Earnings (Nov 4, 2025)</div>
+          <div class="esil-item-text">Revenue −5% YoY · Cloud ARR +11% · Stock −4.08% post-report despite EPS beat · [PUBLIC-VERIFIED]</div>
+        </div>
+        <div class="esil-item">
+          <div class="esil-item-label">Nucleus Research ROI Study (Jul 2025)</div>
+          <div class="esil-item-text">427% avg 3-yr ROI claim · 11-month payback · Commissioned by Teradata · Selected customer sample · [PUBLIC-VERIFIED — context: commissioned research]</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="esil-provenance">
+      <strong>SCORING PROVENANCE STATEMENT</strong><br>
+      All scores, findings, and observations in this brief are comparative estimates derived from public-signal analysis mapped against regulatory anchors (NIST AI RMF, ISO/IEC 42001, EU AI Act), academic anchors (MIT, McKinsey, Edmondson, CMR 2025, Conference Board 2026), and live market signals from SEC filings, earnings transcripts, and press releases listed above. Claims tagged [PUBLIC-VERIFIED] are confirmed by named public sources with dates. Claims tagged [INFERRED-PUBLIC] are consistent with available signals but not directly confirmed by a single named source. No claim in this brief is presented as an audited third-party measurement. This document is a decision-support instrument for pre-engagement positioning.<br><br>
+      <strong>McDonald (2026) · Epoch Frameworks LLC · Behavioral Intelligence Research · Fort Worth, TX · DACR License v2.6 · Internal Use Only</strong>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <div class="footer-brand">Epoch <span>Frameworks</span> LLC</div>
+  <div class="footer-meta">
+    DACR License v2.6 — McDonald (2026) — Confidential<br>
+    Decision-support instrument. Not a third-party audited measurement.
+  </div>
+</div>
+
+</body>
+</html>
